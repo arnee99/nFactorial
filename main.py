@@ -25,9 +25,13 @@ class Game:
                 if column == "W":
                     Block(self, j, i)
                 if column == "F":
-                    Player(self, j, i)
+                    Fire(self, j, i)
                 if column == "P":
-                    Player(self, j, i)
+                    Water(self, j, i)
+                if column == "L":
+                    Lava(self, j, i)
+                if column == "C":
+                    Ice(self, j, i)
         
     # Function to handle events
     def events(self):
