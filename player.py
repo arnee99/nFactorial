@@ -83,10 +83,15 @@ class Fire(pygame.sprite.Sprite):
         self.width = TILESIZE
         self.height = TILESIZE
         
+        self.y_gravity = 1
+        self.jump_height = 10
+        self.y_velocity = self.jump_height
+        
         self.x_change = 0
         self.y_change = 0
         
         self.facing = 'down'
+        self.jumping = False
         
         # image_to_load = pygame.image.load("images/frodo.png")
         # self.image = pygame.Surface([self.width, self.height])
@@ -108,6 +113,14 @@ class Fire(pygame.sprite.Sprite):
         
         self.x_change = 0
         self.y_change = 0
+        
+    # def jump(self):
+        if self.jumping:
+            self.y_change -= self.y_velocity
+            self.y_velocity -= self.y_gravity
+            if self.y_velocity < -self.jump_height:
+                self.jumping = False
+                self.y_velocity = self.jump_height
     
     def movement(self):
         keys = pygame.key.get_pressed()
@@ -118,8 +131,7 @@ class Fire(pygame.sprite.Sprite):
             self.x_change += PLAYER_SPEED
             self.facing = 'right'
         if keys[pygame.K_UP]:
-            self.y_change -= PLAYER_SPEED
-            self.facing = 'up'
+            self.jumping = True
         if keys[pygame.K_DOWN]:
             self.y_change += PLAYER_SPEED
             self.facing = 'down'    
@@ -153,10 +165,15 @@ class Water(pygame.sprite.Sprite):
         self.width = TILESIZE
         self.height = TILESIZE
         
+        self.y_gravity = 1
+        self.jump_height = 10
+        self.y_velocity = self.jump_height
+        
         self.x_change = 0
         self.y_change = 0
         
         self.facing = 'down'
+        self.jumping = False
         
         # image_to_load = pygame.image.load("images/frodo.png")
         # self.image = pygame.Surface([self.width, self.height])
@@ -178,6 +195,13 @@ class Water(pygame.sprite.Sprite):
         
         self.x_change = 0
         self.y_change = 0
+        
+        if self.jumping:
+            self.y_change -= self.y_velocity
+            self.y_velocity -= self.y_gravity
+            if self.y_velocity < -self.jump_height:
+                self.jumping = False
+                self.y_velocity = self.jump_height  
     
     def movement(self):
         keys = pygame.key.get_pressed()
@@ -189,7 +213,7 @@ class Water(pygame.sprite.Sprite):
             self.facing = 'right'
         if keys[pygame.K_w]:
             self.y_change -= PLAYER_SPEED
-            self.facing = 'up'
+            self.jumping = True
         if keys[pygame.K_s]:
             self.y_change += PLAYER_SPEED
             self.facing = 'down'    

@@ -9,6 +9,7 @@ class Game:
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
+        self.background_image = pygame.image.load("images/background/wall2.png").convert()
         self.clock = pygame.time.Clock()
         self.running = True
 
@@ -32,6 +33,8 @@ class Game:
                     Lava(self, j, i)
                 if column == "C":
                     Ice(self, j, i)
+                if column == "A":
+                    Acid(self, j, i)
         
     # Function to handle events
     def events(self):
@@ -55,6 +58,7 @@ class Game:
 
     # Function to draw each element
     def draw(self):
+        # self.screen.blit(self.background_image, (0, 0))
         self.screen.fill(BLACK)
         self.all_sprites.draw(self.screen)
         self.clock.tick(FPS)
